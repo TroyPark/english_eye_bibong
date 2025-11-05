@@ -602,7 +602,7 @@
                 <h2>🎯 책임형 맞춤 관리 | 잉글리시아이 비봉센터점</h2>
                 <p>우리학교 맞춤! 학생에 맞춤! 최적의 영어 학습법 💡</p>
             </div>
-            <a href="https://blog.naver.com/englisheye_bibong" target="_blank" class="banner-btn">알아보기</a>
+            <a href="https://blog.naver.com/englisheye_bibong" target="_blank" class="banner-btn" onclick="trackHomepageClick()">알아보기</a>
         </div>
     </div>
     
@@ -1046,6 +1046,10 @@
                 navigator.share(shareData)
                     .then(() => {
                         console.log('공유 성공!');
+                        // 네이버 애널리틱스 이벤트 전송
+                        if (window.wcs && typeof wcs.event === 'function') {
+                            wcs.event("공유하기", "공유횟수");
+                        }
                     })
                     .catch((error) => {
                         if (error.name !== 'AbortError') {
@@ -1063,6 +1067,10 @@
         function fallbackShare(shareText) {
             navigator.clipboard.writeText(shareText).then(() => {
                 alert('✅ 결과가 복사되었습니다!\n카카오톡이나 메시지에 붙여넣기해서 친구들에게 공유해보세요 😊');
+                // 네이버 애널리틱스 이벤트 전송
+                if (window.wcs && typeof wcs.event === 'function') {
+                    wcs.event("공유하기", "공유횟수");
+                }
             }).catch(() => {
                 // 클립보드 API도 지원하지 않는 경우
                 const textArea = document.createElement('textarea');
@@ -1072,6 +1080,10 @@
                 try {
                     document.execCommand('copy');
                     alert('✅ 결과가 복사되었습니다!\n카카오톡이나 메시지에 붙여넣기해서 친구들에게 공유해보세요 😊');
+                    // 네이버 애널리틱스 이벤트 전송
+                    if (window.wcs && typeof wcs.event === 'function') {
+                        wcs.event("공유하기", "공유횟수");
+                    }
                 } catch (err) {
                     alert('공유 기능을 사용할 수 없습니다.');
                 }
@@ -1088,7 +1100,10 @@
         
         // 홈페이지 버튼 클릭 추적
         function trackHomepageClick() {
-            // 클릭 추적 (필요시 추가)
+            // 네이버 애널리틱스 이벤트 전송
+            if (window.wcs && typeof wcs.event === 'function') {
+                wcs.event("띠배너클릭", "블로그이동");
+            }
         }
     </script>
     
